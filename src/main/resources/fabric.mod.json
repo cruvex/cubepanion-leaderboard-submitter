@@ -2,23 +2,30 @@
 	"schemaVersion": 1,
 	"id": "cubepanion-leaderboard-submitter",
 	"version": "${version}",
-	"name": "cubepanion-leaderboard-submitter",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Cubepanion Leaderboard Submitter",
+	"description": "Fabric mod for submitting CubeCraft leaderboard scores to Cubepanion (Labymod addon)",
 	"authors": [
-		"Me!"
+		"cruvex"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/cruvex/cubepanion-leaderboard-submitter",
+		"sources": "https://github.com/cruvex/cubepanion-leaderboard-submitter",
+		"cubepanion": "https://github.com/Fesaa/Cubepanion"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/cubepanion-leaderboard-submitter/icon.png",
+	"icon": "assets/cubepanion-leaderboard-submitter/cube-logo-cropped.png",
 	"environment": "client",
 	"entrypoints": {
 		"client": [
 			"com.cruvex.cubepanionleaderboardsubmitter.CubepanionLeaderboardSubmitterClient"
 		]
 	},
+	"mixins": [
+		{
+			"config": "cubepanion-leaderboard-submitter.client.mixins.json",
+			"environment": "client"
+		}
+	],
 	"depends": {
 		"fabricloader": ">=0.19.2",
 		"minecraft": "~1.21.11",
