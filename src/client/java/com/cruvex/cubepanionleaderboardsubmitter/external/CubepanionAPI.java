@@ -86,24 +86,20 @@ public class CubepanionAPI {
 
         LOGGER.info("Submitting leaderboard for game: {}, player: {}", game.name(), playerUuid);
 
-        LOGGER.info("Submission JSON: {}", json);
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrlv2 + "/Leaderboard"))
+                .header("Content-Type", "application/json")
+                .header("User-Agent", "CubeCraftLeaderboardSubmitterFabric")
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .build();
 
-
-        // Commented for testing
-//        HttpRequest request = HttpRequest.newBuilder()
-//                .uri(URI.create(baseUrlv2 + "/Leaderboard"))
-//                .header("Content-Type", "application/json")
-//                .POST(HttpRequest.BodyPublishers.ofString(json))
-//                .build();
-//
-//        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-//                .thenCompose(response -> {
-//                    if (response.statusCode() != 202) {
-//                        return CompletableFuture.failedFuture(new Exception("Server returned status code " + response.statusCode()));
-//                    }
-//                    return CompletableFuture.completedFuture(null);
-//                });
-        return CompletableFuture.completedFuture(null);
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenCompose(response -> {
+                    if (response.statusCode() != 202) {
+                        return CompletableFuture.failedFuture(new Exception("Server returned status code " + response.statusCode()));
+                    }
+                    return CompletableFuture.completedFuture(null);
+                });
     }
 
     private <T> CompletableFuture<T> get(String url, TypeToken<T> token) {

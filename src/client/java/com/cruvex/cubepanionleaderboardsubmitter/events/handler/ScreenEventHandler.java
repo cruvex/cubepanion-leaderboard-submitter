@@ -1,4 +1,4 @@
-package com.cruvex.cubepanionleaderboardsubmitter.events;
+package com.cruvex.cubepanionleaderboardsubmitter.events.handler;
 
 import com.cruvex.cubepanionleaderboardsubmitter.CubepanionLeaderboardSubmitterClient;
 import com.cruvex.cubepanionleaderboardsubmitter.tracker.LeaderboardTracker;
@@ -25,13 +25,8 @@ public class ScreenEventHandler {
             AbstractContainerMenu menu = client.player.containerMenu;
             if ((!(menu instanceof ChestMenu))) return;
 
-            LOGGER.info("Server IP: {}", ip);
-            LOGGER.info("KubusMaken: {}", isKubusMaken(ip));
-            LOGGER.info("Screen initialized: {}", screen.getClass().getName());
-
             String title = screen.getTitle().getString();
             if (!title.contains("Leaderboard")) return;
-            LOGGER.info("Container title: {}", title);
 
             leaderboardTracker.processScreen();
         });

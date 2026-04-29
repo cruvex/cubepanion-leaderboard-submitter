@@ -9,13 +9,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
@@ -159,9 +157,6 @@ public class LeaderboardTracker {
             count++;
         }
 
-        LOGGER.debug("Adding {} rows from {} items for page {} of {}",
-                count, context.items().size(), context.page(), context.game().displayName());
-
         if (!checkSubmit()) return null;
         return context;
     }
@@ -174,8 +169,6 @@ public class LeaderboardTracker {
         String name = tooltip.get(0).trim();
         String ps = tooltip.get(1).replaceAll("[^0-9]", "").trim();
         String ss = tooltip.get(2).replaceAll("[^0-9]", "").trim();
-
-        LOGGER.info("Parsed tooltip: name={}, ps={}, ss={}", name, ps, ss);
 
         if (ps.isEmpty() || ss.isEmpty()) return null;
 
